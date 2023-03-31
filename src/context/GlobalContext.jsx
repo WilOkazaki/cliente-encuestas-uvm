@@ -37,7 +37,7 @@ export const ContextProvider = ({ children }) => {
       buscaUsuario.password === datos.password ? true : false;
 
     if (!comparaPassword) return "contrseñas no coinciden";
-    // dispath({ type: "INICIAR_SESION", payload: buscaUsuario });
+    dispath({ type: "INICIAR_SESION", payload: buscaUsuario });
     return "ok";
   };
   return (
