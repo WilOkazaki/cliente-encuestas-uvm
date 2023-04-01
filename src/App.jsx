@@ -4,6 +4,10 @@ import Login from "./components/Auth/Login";
 import Registro from "./components/Auth/Registro";
 import AuthTemplate from "./components/Auth/AuthTemplate";
 import { ContextProvider } from "./context/GlobalContext";
+import Datos from "./components/Escritorio/Datos";
+import Layout from "./components/Template/Layout";
+import Encuestas from "./components/Encuestas/Encuestas";
+import CrearEncuesta from "./components/Encuestas/CrearEncuesta";
 import { useEffect } from "react";
 
 function App() {
@@ -21,6 +25,13 @@ function App() {
         <Route path="/" element={<AuthTemplate />}>
           <Route path="login" element={<Login />} />
           <Route path="registro" element={<Registro />} />
+        </Route>
+
+        <Route path="/escritorio" element={<Layout />}>
+          <Route path="inicio" element={<Datos />} />
+          <Route path="encuestas" element={<Encuestas />} />
+          <Route path="encuestas/crear" element={<CrearEncuesta />} />
+          <Route path="perfil/" element={<h1>Perfil</h1>} />
         </Route>
 
         <Route
