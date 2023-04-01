@@ -3,6 +3,8 @@ import "./App.css";
 import { ContextProvider } from "./context/GlobalContext";
 import Layout from "./components/Template/Layout";
 import Datos from "./components/Escritorio/Datos";
+import Encuestas from "./components/Encuestas/Encuestas";
+import CrearEncuesta from "./components/Encuestas/CrearEncuesta";
 
 function App() {
   return (
@@ -12,8 +14,8 @@ function App() {
 
         <Route path="/escritorio" element={<Layout />}>
           <Route path="inicio" element={<Datos />} />
-          <Route path="encuestas" element={<h1>ENCUESTAS</h1>} />
-          <Route path="encuestas/crear" element={<h1>crear encuesta</h1>} />
+          <Route path="encuestas" element={<Encuestas />} />
+          <Route path="encuestas/crear" element={<CrearEncuesta />} />
           <Route path="perfil/" element={<h1>Perfil</h1>} />
         </Route>
       </Routes>
