@@ -1,0 +1,42 @@
+
+.navbar-icon{
+    font-size: 2rem;
+    padding: 3px;
+    transition: all .5s;
+}
+
+.navbar-icon:hover{
+    cursor: pointer;
+    color: #FFF;
+}
+
+.sidebar{
+    width: 300px;
+    position: fixed;
+    top: 0;
+    z-index: 30;
+    transition: all .5s;
+}
+
+.sidebar-cerrado{
+    left: -320px;
+}
+
+.sidebar-abierto{
+    left: 0;
+}
+
+.sidebar-item{
+    color: #212529;
+    transition: all .8s;
+}
+
+.sidebar-item:hover{
+    color: #FFF;
+}
+
+.elimina-opcion  {
+    position: absolute;
+    top: 20%;
+    right: 10px; 
+}
