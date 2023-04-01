@@ -1,0 +1,13 @@
+.mostrar-contraseña{
+    position: absolute;
+    top: 35%;
+    right: 10px; 
+    font-size: 1.5rem; 
+    color: #888;
+    padding: 2px;
+}
+
+.mostrar-contraseña:hover{
+    cursor: pointer;
+    color: #333;
+}
