@@ -10,6 +10,7 @@ import Encuestas from "./components/Encuestas/Encuestas";
 import CrearEncuesta from "./components/Encuestas/CrearEncuesta";
 import Resultados from "./components/Encuestas/Resultados";
 import ResultadoEncuesta from "./components/Encuestas/ResultadoEncuesta";
+import Perfil from "./components/Perfil/Perfil";
 import { useEffect } from "react";
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
           <Route path="encuestas/crear" element={<CrearEncuesta />} />
           <Route path="resultados" element={<Resultados />} />
           <Route path="resultados/:idEncuesta" element={<ResultadoEncuesta />} />
-          <Route path="perfil/:idUsuario" element={<h1>Perfil</h1>} />
+          <Route path="perfil/:idUsuario" element={<Perfil />} />
           <Route path="usuarios" element={<h1>Usuarios</h1>} />
         </Route>
 
