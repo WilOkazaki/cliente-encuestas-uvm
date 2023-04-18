@@ -1,34 +1,56 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+// mustra los resultados de una encuesta en un grafico utilizando chart.js
+export function Grafico({ datos }) {
+  const { nocturno } = useContext(GlobalContext);
+  ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ['Dato1', 'Dato2', 'Dato3', 'Dato4', 'Dato5'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 7, 5, 4],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.6)',
-        'rgba(54, 162, 235, 0.6)',
-        'rgba(255, 206, 86, 0.6)',
-        'rgba(75, 192, 192, 0.6)',
-        'rgba(153, 102, 255, 0.6)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+  const random_rgba = () => {
+    let o = Math.round;
+    let r = Math.random;
+    let s = 255;
+    const rgba = `rgba(${o(r() * s)}, ${o(r() * s)}, ${o(r() * s)}, 0.6)`;
+    return rgba;
+  };
+  let labels = [];
+  let backgroundColor = [];
+  let data = [];
 
-export function Grafico() {
-  return <Pie data={data} />;
+  datos.forEach(dato => {
+    labels.push(dato.opcion);  
+    data.push(dato.numero);
+    backgroundColor.push(random_rgba());
+  });
+
+  const dataResultado = {
+    labels,
+    datasets: [
+      {
+        label: "",
+        data,
+        backgroundColor,
+        borderWidth: 1,
+        
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+        legend: {
+            labels: {
+                // This more specific font property overrides the global property
+                font: {
+                    size: 18
+                },
+                color: nocturno ? "#fff" : "#000"
+            }
+        }
+    }
+}
+  return <Pie data={dataResultado} options={options} className="w-100 h-100" />;
 }
