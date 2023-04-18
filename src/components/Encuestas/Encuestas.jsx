@@ -1,483 +1,72 @@
-import { useEffect, useState } from "react";
-import { Container, Row, Card, Col, Form, Button } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Container, Row } from "react-bootstrap";
+import { BiPlus } from "react-icons/bi";
+import { GlobalContext } from "../../context/GlobalContext";
+import Encuesta from "./Encuesta";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
+// componente que muestra la lista de encuestas por responder
 function Encuestas() {
-  useEffect(() => {
-    function mostrar() {
-      const elementos = document.querySelectorAll(".revelar");
+  const { usuario } = useContext(GlobalContext);
+  const [encuestas, setEncuestas] = useState([]);
 
-      elementos.forEach((elemento) => {
-        const altoVentana = window.innerHeight;
-        const revelar = elemento.getBoundingClientRect().top;
-        if (revelar < altoVentana) {
-          elemento.classList.remove("opacity-0");
-          elemento.classList.add("animate__bounceIn");
-        }
+  const cargaEncuestas = () => {
+    axios
+      .get("http://localhost:3000/api/encuestas", {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      })
+      .then(function (response) {
+        setEncuestas(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-    }
-
-    mostrar();
-
-    window.addEventListener("scroll", mostrar);
+  };
+  useEffect(() => {
+    cargaEncuestas();
   }, []);
-
   return (
     <Container>
+      {usuario.rol === "admin" ? (
+        <Link
+          to="crear"
+          style={{
+            position: "fixed",
+            right: "3%",
+            bottom: "3%",
+            zIndex: 30,
+          }}
+        >
+          <button
+            className="btn btn-primary rounded-circle"
+            style={{
+              width: "50px",
+              height: "50px",
+            }}
+          >
+            <BiPlus />
+          </button>
+        </Link>
+      ) : (
+        ""
+      )}
+
       <h1 className="text-center mt-3 mb-5 text-primary">
-        {" "}
         Lista de Encuestas{" "}
       </h1>
       <Row className="mt-3">
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="checkbox"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="checkbox"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="checkbox"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          xs={12}
-          lg={6}
-          className="mb-3 revelar opacity-0 animate__animated"
-        >
-          <Card>
-            <Card.Body>
-              <Card.Title className="fs-4">Nueva Encuesta</Card.Title>
-              <Card.Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                omnis ad eos doloremque perspiciatis quibusdam eius fuga.
-              </Card.Text>
-              <Form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                <Form.Check
-                  type="radio"
-                  label="Opción1"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción2"
-                  name="encuesta"
-                  className="mb-3"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Opción3"
-                  name="encuesta"
-                  className="mb-3"
-                />
-
-                <div className="d-flex justify-content-end mb-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="d-inline-block"
-                  >
-                    Responder
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
+        {encuestas.map((item, i) => (
+          <Encuesta
+            encuesta={item}
+            usuario={usuario}
+            key={i}
+            cargaEncuestas={cargaEncuestas}
+          />
+        ))}
       </Row>
     </Container>
   );
