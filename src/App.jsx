@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.scss";
 import Login from "./components/Auth/Login";
 import Registro from "./components/Auth/Registro";
@@ -11,6 +11,7 @@ import CrearEncuesta from "./components/Encuestas/CrearEncuesta";
 import Resultados from "./components/Encuestas/Resultados";
 import ResultadoEncuesta from "./components/Encuestas/ResultadoEncuesta";
 import Perfil from "./components/Perfil/Perfil";
+import Lista from "./components/Usuarios/Lista";
 import { useEffect } from "react";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
           <Route path="resultados" element={<Resultados />} />
           <Route path="resultados/:idEncuesta" element={<ResultadoEncuesta />} />
           <Route path="perfil/:idUsuario" element={<Perfil />} />
-          <Route path="usuarios" element={<h1>Usuarios</h1>} />
+          <Route path="usuarios" element={<Lista />} />
         </Route>
 
         <Route
@@ -46,6 +47,7 @@ function App() {
           element={
             <div className="w-100 vh-100 d-flex flex-column justify-content-center">
               <h1 className="text-center">Error 404</h1>
+              <Link className="text-center text-dark" to="/escritorio/inicio">Volver al inicio</Link>
             </div>
           }
         />
