@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import Login from "./components/Auth/Login";
 import Registro from "./components/Auth/Registro";
 import AuthTemplate from "./components/Auth/AuthTemplate";

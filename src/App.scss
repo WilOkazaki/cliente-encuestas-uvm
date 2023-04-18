@@ -1,0 +1,69 @@
+// importacion de los archivos con las variables, animaciones y fuentes
+@import "./scss/variables";
+
+// importacion de bootstrap
+@import "bootstrap";
+
+.mostrar-contraseña{
+  position: absolute;
+  top: 35%;
+  right: 10px; 
+  font-size: 1.5rem; 
+  color: #888;
+  padding: 2px;
+  &:hover{
+    cursor: pointer;
+    color: #333;
+  }
+}
+
+.navbar-icon{
+  font-size: 2rem;
+  padding: 3px;
+  transition: all .5s;
+  &:hover{
+    cursor: pointer;
+    color: #FFF;
+  }
+}
+.sidebar{
+  width: 300px;
+  position: fixed;
+  top: 0;
+  z-index: 30;
+  transition: all .5s;
+}
+
+.sidebar-cerrado{
+  left: -320px;
+}
+
+.sidebar-abierto{
+  left: 0;
+}
+
+.sidebar-item{
+  color: #212529;
+  transition: all .3s;
+  &:hover{
+    color: #9f9c9c;
+  }
+}
+
+.elimina-opcion  {
+  position: absolute;
+  top: 20%;
+  right: 10px; 
+}
+
+.bg-dark-2{
+  background-color: #444;
+}
+
+.item-inicio{
+  transition: all .5s ease;
+  &:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+}
