@@ -1,46 +1,60 @@
-import { Button, Card, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
-import EncuestaReciente from "./EncuestaReciente";
-import { Grafico } from "./Grafico";
-import { Grafico2 } from "./Grafico2";
-import InfoCard from "./InfoCard";
-import Participacion from "./Participacion.jsx";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
+import {
+  AiOutlinePieChart,
+  AiOutlineUser,
+} from "react-icons/ai";
+import { RiSurveyLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
+// componente de la pantalla de inicio
 function Datos() {
+  const { usuario, nocturno } = useContext(GlobalContext);
   return (
     <>
-      <Row className="mt-5 pt-4 w-100">
-        <InfoCard color="info" titulo="tituloDato" dato="100" />
-        <InfoCard color="warning" titulo="tituloDato" dato="100" />
-        <InfoCard color="danger" titulo="tituloDato" dato="100" />
-        <InfoCard color="success" titulo="tituloDato" dato="100" />
-      </Row>
+      <h1 className="mt-3 mb-5 text-center text-primary text-capitalize">
+        {`Bienvenido ${usuario.nombre} ${usuario.apellido}`}
+      </h1>
 
-      <Row className="mt-3">
-        <Participacion />
-				<EncuestaReciente />
-      </Row>
+      <div className="row mt-3">
+        <div className="col-6 col-md-4 mb-3 ">
+          <Link
+            to="/escritorio/encuestas"
+            className={`text-decoration-none ${nocturno ? "text-light" : "text-dark"}`}
+          >
+            <div className={`border border-primary text-center rounded p-3 ${nocturno ? "bg-dark" : "bg-light"} item-inicio`}>
+              <RiSurveyLine style={{ fontSize: "5em" }} />
+              <p className="fs-4">ENCUESTAS</p>
+            </div>
+          </Link>
+        </div>
 
-			<Row className="mt-3">
-				<Col sx={12} md={6} className="mb-3">
-					<Card>
-						<Card.Body>
-							<Card.Title className="fs-4 mb-3"> Titulo de la encuesta1</Card.Title>
-							<Grafico />
-						</Card.Body>
-					</Card>
-				</Col>
+				<div className="col-6 col-md-4 mb-3 ">
+          <Link
+						to="/escritorio/resultados"
+            className={`text-decoration-none ${nocturno ? "text-light" : "text-dark"}`}
+          >
+            <div className={`border border-primary text-center rounded p-3 ${nocturno ? "bg-dark" : "bg-light"} item-inicio`}>
+              <AiOutlinePieChart style={{ fontSize: "5em" }} />
+              <p className="fs-4">RESULTADO</p>
+            </div>
+          </Link>
+        </div>
 
-				<Col sx={12} md={6} className="mb-3">
-					<Card className="h-100">
-						<Card.Body>
-							<Card.Title className="fs-4 mb-3"> Titulo de la encuesta2</Card.Title>
-							<div className="d-flex flex-column h-100 justify-content-center">
-								<Grafico2 />
-							</div>
-						</Card.Body>
-					</Card>
-				</Col>
-			</Row>
+				<div className="col-6 col-md-4 mb-3 ">
+          <Link
+            to={`/escritorio/perfil/${usuario._id}`}
+            className={`text-decoration-none ${nocturno ? "text-light" : "text-dark"}`}
+          >
+            <div className={`border border-primary text-center rounded p-3 ${nocturno ? "bg-dark" : "bg-light"} item-inicio`}>
+              <AiOutlineUser style={{ fontSize: "5em" }} />
+              <p className="fs-4">PERFIL</p>
+            </div>
+          </Link>
+        </div>
+
+
+      </div>
     </>
   );
 }
