@@ -21,6 +21,7 @@ function App() {
 
   return (
     <ContextProvider>
+      
       <Routes>
         <Route path="/" element={<AuthTemplate />}>
           <Route path="login" element={<Login />} />
@@ -31,7 +32,10 @@ function App() {
           <Route path="inicio" element={<Datos />} />
           <Route path="encuestas" element={<Encuestas />} />
           <Route path="encuestas/crear" element={<CrearEncuesta />} />
-          <Route path="perfil/" element={<h1>Perfil</h1>} />
+          <Route path="resultados" element={<h1>Resultados</h1>} />
+          <Route path="resultados/:idEncuesta" element={<h1>Resultado Encuesta</h1>} />
+          <Route path="perfil/:idUsuario" element={<h1>Perfil</h1>} />
+          <Route path="usuarios" element={<h1>Usuarios</h1>} />
         </Route>
 
         <Route
